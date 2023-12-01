@@ -22,7 +22,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
 
     def list(self, request, *args, **kwargs):
-        category = self.get_object()
+        category = request.query_params.get('category', None)
         if category:
             self.queryset = self.queryset.filter(category=category)
         return super().list(request, *args, **kwargs)
@@ -45,10 +45,10 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def average_rating(self, request, pk=None):
-        product  = self.get_object()
+        product = self.get_object()
         reviews = product.reviews.all()
 
-        if reviews.count(0 == 0):
+        if reviews.count() == 0:
             return Response({"average_rating": "No reviews yet!"})
 
         avg_rating = sum([review.rating for review in reviews]) / reviews.count()
