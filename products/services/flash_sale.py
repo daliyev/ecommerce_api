@@ -5,8 +5,10 @@ from rest_framework import status
 from datetime import datetime, timedelta
 from products.models import Product, ProductViewHistory  # 29:35
 
-from rest_framework import generics, serializers
+from rest_framework import generics, serializers, filters
 from products.models import FlashSale
+
+from django_filters import rest_framework as django_filters
 
 
 class FlashSaleListCreateView(generics.ListCreateAPIView):
@@ -18,6 +20,10 @@ class FlashSaleListCreateView(generics.ListCreateAPIView):
             fields = ('id', 'product', 'discount_percentage', 'start_time', 'end_time')
 
     serializer_class = FlashSaleSerializer
+
+    # search
+    filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
+    search_fields = ['discount_percentage']
 
 
 @api_view(['GET'])

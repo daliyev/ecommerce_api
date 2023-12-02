@@ -13,6 +13,7 @@ from django_filters import rest_framework as django_filters
 from .filters import ProductFilter
 from rest_framework import filters
 
+
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
