@@ -147,3 +147,21 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=120),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+
+# Email_backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'daliyev5797@gmail.com'
+EMAIL_HOST_PASSWORD = 'jutkxlfxejumzjye'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}/',
+    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}/',
+    'ACTIVATION_URL': 'activate/{uid}/{token}/',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {},
+}
